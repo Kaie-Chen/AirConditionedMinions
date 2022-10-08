@@ -14,7 +14,7 @@ struct range{
 
 bool Comparator(const range a, const range b) {
 	//	cout << a.weight << " < " << b.weight << "? ";
-	return a.weight < b.weight;
+	return a.upper > b.upper;
 }
 
 
@@ -81,28 +81,24 @@ for (int index = 0; index < listOfRanges.size(); index++){
 
 
 	int numOfRooms = 0;
-	for(int k = 0; k < listOfRanges.size(); k++){
-//		cout << "\n" << listOfRanges[k].lower << "-->" << listOfRanges[k].upper << "\n";
-		lower = listOfRanges[k].lower;
-		upper = listOfRanges[k].upper;
-
+	while(listOfRanges.size() != 0){
 		
-		if (upper == -1){
-			//listOfRanges.erase(listOfRanges.begin()+j);
-			continue;
-		}
-		vector<int> overLap[(upper - lower + 1)];
+//		cout << "\n" << listOfRanges.back().lower << "-->" << listOfRanges.back().upper << "\n\n";
+		
+		int upper = listOfRanges.back().upper;
+		listOfRanges.pop_back();
+		numOfRooms++;
 
 		for(int i = 0; i < listOfRanges.size(); i++){
-			for (int j = lower; j <= upper; j++){
-//				cout << listOfRanges[i].upper << " > " << j << " > " << listOfRanges[i].lower << "\n";
-				if ( i != k && listOfRanges[i].upper >= j && listOfRanges[i].lower <= j){
-//					cout << "Pushed back the edge to " << j-lower << " ! \n";
-					overLap[j-lower].push_back(i);
+//			cout << listOfRanges[i].lower << "-->" << listOfRanges[i].upper << "\n";
+			lower = listOfRanges[i].lower;
+			if (lower <= upper){
+					listOfRanges.erase(listOfRanges.begin() + i);
+					i--;
 				}
-			}				
+							
 		}
-		
+		/*	
 		int index = 0;
 		int max = 0;
 
@@ -133,6 +129,7 @@ for (int index = 0; index < listOfRanges.size(); index++){
 			if (e.upper != -1 && e.lower != -1){
 				numOfRooms++;
 			}
+			*/
 
 		}
 	
