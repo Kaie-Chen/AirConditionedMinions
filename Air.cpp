@@ -13,7 +13,7 @@ struct range{
 
 bool Comparator(const range a, const range b) {
 	//	cout << a.weight << " < " << b.weight << "? ";
-	return a.weight < b.weight;
+	return a.weight > b.weight;
 }
 
 
@@ -40,9 +40,9 @@ void optimizeMinions(){
 		listOfRanges.pop_back();
 		numOfRooms++;
 		for(int i = 0; i < listOfRanges.size(); i++){
-	//		cout << "Other's range: " << listOfRanges[i].lower << " , " << listOfRanges[i].upper << " Our range: " << lower << " , " << upper << "\n";
-			if (listOfRanges[i].upper >= lower || listOfRanges[i].lower <= upper){
-	//			cout << "Delted the other range!\n";
+//			cout << "Other's range: " << listOfRanges[i].lower << " , " << listOfRanges[i].upper << " Our range: " << lower << " , " << upper << "\n";
+			if (listOfRanges[i].upper >= lower && listOfRanges[i].lower <= upper){
+//				cout << "Deleted the other range!\n";
 				listOfRanges.erase(listOfRanges.begin() + i);
 			}
 		}
